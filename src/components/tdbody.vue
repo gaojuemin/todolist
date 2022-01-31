@@ -12,7 +12,7 @@ export default {
     data(){
         return{
             todos:[                   //输入内容作为数组，数组3个属性，id，title内容，done标记是否完成布尔值
-                                      //{id:'001',item:'eat',done:true},
+             {id:'001',item:'eat',done:true},
             ]
         }
     }
