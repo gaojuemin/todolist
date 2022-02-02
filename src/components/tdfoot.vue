@@ -1,18 +1,16 @@
 <template>
-    <div class="todo-footer">
-        <label>
-            <input type="checkbox" />
-        </label>
-        <span>
-            <span>completed</span> / all
-        </span>
-        <button class="btn btn-danger">clean list</button>
-    </div>
+  <div class="todo-footer">
+    <label>
+      <input type="checkbox" />
+    </label>
+    <span> <span>completed</span> / all </span>
+    <button class="btn btn-danger">clean list</button>
+  </div>
 </template>
 <script>
 export default {
-    name: 'tdfoot'
-}
+  name: "tdfoot",
+};
 </script>
 
 <style>
