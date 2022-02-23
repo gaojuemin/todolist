@@ -6,14 +6,17 @@
 </template>
 <script>
 import { nanoid } from "nanoid";
+// import { useStore } from 'vuex'
 export default {
   name: "tdheader",
-  props: ["addtodo"], //vc
+  // props: ["addtodo"], //vc
   methods: {
     add(event) {
-      const todoobj = { id: nanoid(), item: event.target.value, done: false }; //将输入内容包装成todo对象。
+      const inputvalue = { id: nanoid(), item: event.target.value, done: false}; //将输入内容包装成todo对象。, endtime: event.endtime ,starttime:gettime()
+      this.$store.dispatch('addtodo',inputvalue);
+      
       //console.log(todoobj)
-      this.addtodo(todoobj); //这里的this指的是
+      // this.addtodo(todoobj); //这里的this指的是
       event.target.value = ""; //输入后输入框变空。
     },
   },
