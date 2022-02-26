@@ -1,7 +1,7 @@
 <template>
   <h1 class="title">TODOS</h1>
   <div class="todo-header">
-    <input type="text" placeholder="What needs to be done?" @keyup.enter="add" />
+    <input type="text" placeholder="What needs to be done?" v-model="item" @keyup.enter="add" />
   </div>
 </template>
 <script>
@@ -10,14 +10,22 @@ import { nanoid } from "nanoid";
 export default {
   name: "tdheader",
   // props: ["addtodo"], //vc
+
+  data(){
+    return{
+      item:""
+    }
+  },
   methods: {
     add(event) {
-      const inputvalue = { id: nanoid(), item: event.target.value, done: false}; //将输入内容包装成todo对象。, endtime: event.endtime ,starttime:gettime()
+      const inputvalue = { id: nanoid(), title:'',description:this.item, done: false,createTime:'',finishTime:''}; //将输入内容包装成todo对象。, endtime: event.endtime ,starttime:gettime()
       this.$store.dispatch('addtodo',inputvalue);
-      
+      console.log("app33",this.item);
+      this.$store.dispatch('addlist',inputvalue);
+      this.item=''
       //console.log(todoobj)
       // this.addtodo(todoobj); //这里的this指的是
-      event.target.value = ""; //输入后输入框变空。
+      // event.target.value = ""; //输入后输入框变空。
     },
   },
 };

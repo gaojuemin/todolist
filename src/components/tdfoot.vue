@@ -3,7 +3,7 @@
     <label>
       <!-- <input type="checkbox" :checked="alldone" @change = "changeall" /> -->
       <!-- 可以用v-model简写 -->
-      <input type="checkbox" @click="alldone"/>
+      <input type="checkbox" @click="alldone" />
     </label>
     <span>
       <span>completed {{ donetotal }}</span>
@@ -22,10 +22,10 @@ export default {
       return this.$store.state.todos.length;
     },
     donetotal() {
-      
+
       return this.$store.state.todos.reduce((pre, current) => pre + (current.done ? 1 : 0), 0)
     },
-    
+
 
   },
   methods: {
@@ -38,18 +38,18 @@ export default {
     //   }
 
     // },
-     alldone(done){
-    this.$store.dispatch('checkall',done)//虽然功能实现，但是还得想更清楚。
+    alldone(done) {
+      this.$store.dispatch('checkall', done)//虽然功能实现，但是还得想更清楚。
     },
-     clearall(done){
-        this.$store.dispatch('delall',done)
+    clearall(done) {
+      this.$store.dispatch('delall', done)
 
-     }
+    }
 
   },
-//   mounted(){
-//   console.log("app1",this.index)
-//  },
+  //   mounted(){
+  //   console.log("app1",this.index)
+  //  },
 }
 
 //数组的方法，得多熟悉。

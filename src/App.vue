@@ -3,16 +3,17 @@
     <div class="todo-container">
       <div class="todo-wrap">
         <!-- <tdheader :addtodo="addtodo" /> -->
-        <tdheader/>
+        <tdheader />
         <!-- 提前准备个函数，传给son-->
         <!-- <tdbody :todos="todos" :checktodo="checktodo" :deltodo="deltodo" /> -->
         <!-- 父组件传子组件，把数据传去tdbody -->
-      
-        <tdbody/>
+
+        <tdbody />
         <!-- <tdfoot :todos="todos" :checkall="checkall" :delall="delall" /> -->
-        <tdfoot/>      
+        <tdfoot />
       </div>
     </div>
+    <tdtable />
   </div>
 </template>
 <script>
@@ -21,6 +22,7 @@ import tdbody from "./components/tdbody.vue";
 import tdfoot from "./components/tdfoot.vue";
 import tdheader from "./components/tdheader.vue";
 import tditem from "./components/tditem.vue";
+import tdtable from "./components/tdtable.vue";
 
 export default {
   name: "App",
@@ -29,8 +31,8 @@ export default {
     tdheader,
     tdbody,
     tdfoot,
-   tditem,
-  
+    tditem,
+    tdtable,
   },
   // data() {
   //   return {
