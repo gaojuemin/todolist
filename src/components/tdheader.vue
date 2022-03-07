@@ -5,25 +5,25 @@
   </div>
 </template>
 <script>
-import { nanoid } from "nanoid";
+import {nanoid} from 'nanoid';
 // import { useStore } from 'vuex'
 export default {
-  name: "tdheader",
+  name: 'tdheader',
   // props: ["addtodo"], //vc
 
-  data(){
-    return{
-      item:""
-    }
+  data() {
+    return {
+      item: '',
+    };
   },
   methods: {
     add(event) {
-      const inputvalue = { id: nanoid(), title:'',description:this.item, done: false,createTime:'',finishTime:''}; //将输入内容包装成todo对象。, endtime: event.endtime ,starttime:gettime()
-      this.$store.dispatch('addtodo',inputvalue);
-      console.log("app33",this.item);
-      this.$store.dispatch('addlist',inputvalue);
-      this.item=''
-      //console.log(todoobj)
+      const inputvalue = {id: nanoid(), title: '', description: this.item, done: false, createTime: '', finishTime: ''}; // 将输入内容包装成todo对象。, endtime: event.endtime ,starttime:gettime()
+      this.$store.dispatch('addtodo', inputvalue);
+      console.log('app33', this.item);
+      this.$store.dispatch('addlist');
+      this.item='';
+      // console.log(todoobj)
       // this.addtodo(todoobj); //这里的this指的是
       // event.target.value = ""; //输入后输入框变空。
     },
