@@ -9,12 +9,12 @@
   </ul>
 </template>
 <script>
-import tditem from "./tditem.vue";
+import tditem from './tditem.vue';
 export default {
-  components: { tditem }
+  components: {tditem},
 };
-  // name: "tdbody",
-  // props: ["todos", "checktodo","deltodo"], //接收app中传入的todos数据
+// name: "tdbody",
+// props: ["todos", "checktodo","deltodo"], //接收app中传入的todos数据
 
 </script>
 

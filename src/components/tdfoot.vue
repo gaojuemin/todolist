@@ -22,8 +22,7 @@ export default {
       return this.$store.state.todos.length;
     },
     donetotal() {
-
-      return this.$store.state.todos.reduce((pre, current) => pre + (current.done ? 1 : 0), 0)
+      return this.$store.state.todos.reduce((pre, current) => pre + (current.done ? 1 : 0), 0);
     },
 
 
@@ -39,20 +38,19 @@ export default {
 
     // },
     alldone(done) {
-      this.$store.dispatch('checkall', done)//虽然功能实现，但是还得想更清楚。
+      this.$store.dispatch('checkall', done);// 虽然功能实现，但是还得想更清楚。
     },
     clearall(done) {
-      this.$store.dispatch('delall', done)
-
-    }
+      this.$store.dispatch('delall', done);
+    },
 
   },
   //   mounted(){
   //   console.log("app1",this.index)
   //  },
-}
+};
 
-//数组的方法，得多熟悉。
+// 数组的方法，得多熟悉。
 </script>
 
 <style>

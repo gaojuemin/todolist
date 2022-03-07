@@ -12,68 +12,68 @@
 // import {ref, computed, onMounted} from "vue"
 // import {NDataTable, NButton, NTooltip} from "naive-ui"
 // import {useStore} from 'vuex'
-import axios from 'axios'
-import { h, defineComponent } from 'vue'
-import { NTag, NButton, useMessage } from 'naive-ui'
-import {useStore} from 'vuex'  //vue3使用store
 
-const createColumns = ({ delTodo }) => {
+import {h, defineComponent} from 'vue';
+import {NButton} from 'naive-ui';
+import {useStore} from 'vuex'; // vue3使用store
+
+const createColumns = ({delTodo}) => {
   return [
     {
       title: 'ID',
-      key: 'id'
+      key: 'id',
     },
     {
       title: 'Title',
-      key: 'title'
+      key: 'title',
     },
     {
       title: 'Description',
-      key: 'description'
+      key: 'description',
     },
     {
-      title:'CreateTime',
-      key: 'createTime'
+      title: 'CreateTime',
+      key: 'createTime',
     },
     {
-      title:'FinishTime',
-      key: 'finishTime'
+      title: 'FinishTime',
+      key: 'finishTime',
     },
     {
       title: 'Action',
       key: 'actions',
-      render (row) {
+      render(row) {
         return h(
-          NButton,
-          {
-            size: 'small',
-            onClick: () => delTodo(row)
-          },
-          { default: () => 'DelTodo' }
-        )
-      }
-    }
-  ]
-}
+            NButton,
+            {
+              size: 'small',
+              onClick: () => delTodo(row),
+            },
+            {default: () => 'DelTodo'},
+        );
+      },
+    },
+  ];
+};
 
 export default defineComponent({
-  setup () {
-    const store = useStore()
+  setup() {
+    const store = useStore();
     // console.log(store.state.netlist,"app3")
-    store.dispatch('readlist') 
+    store.dispatch('readlist');
     return {
-      data:store.state.netlist.data,
+      data: store.state.netlist.data,
       columns: createColumns({
-        delTodo (rowData) {
-        //??????
-        }
+        delTodo(rowData) {
+        // ??????
+        },
       }),
       pagination: {
-        pageSize: 10
-      }
-    }
-  }
-})
+        pageSize: 10,
+      },
+    };
+  },
+});
 
 
 </script>
