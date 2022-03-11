@@ -9,13 +9,12 @@
   </n-space>
 </template>
 <script>
-// import {ref, computed, onMounted} from "vue"
-// import {NDataTable, NButton, NTooltip} from "naive-ui"
-// import {useStore} from 'vuex'
 
 import {h, defineComponent} from 'vue';
 import {NButton} from 'naive-ui';
 import {useStore} from 'vuex'; // vue3使用store
+const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
+const store = useStore();
 
 const createColumns = ({delTodo}) => {
   return [
@@ -40,16 +39,11 @@ const createColumns = ({delTodo}) => {
       key: 'finishTime',
     },
     {
-      title: 'Action',
+      title: 'DelTodo',
       key: 'actions',
       render(row) {
         return h(
-            NButton,
-            {
-              size: 'small',
-              onClick: () => delTodo(row),
-            },
-            {default: () => 'DelTodo'},
+            NButton,{size: 'small',onClick: () => delTodo(row)},{default: () => 'DelTodo'},
         );
       },
     },
@@ -64,16 +58,18 @@ export default defineComponent({
     return {
       data: store.state.netlist.data,
       columns: createColumns({
-        delTodo(rowData) {
-        // ??????
+        async delTodo(rowData) {
+          console.log(rowData.id)
+          await store.dispatch('delTableTodo', rowData.id);
+          await store.dispatch('readlist')
+          await sleep(2000)
+          location.reload();
         },
       }),
       pagination: {
-        pageSize: 10,
+        pageSize: 15,
       },
     };
   },
 });
-
-
 </script>

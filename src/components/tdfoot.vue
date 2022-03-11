@@ -1,8 +1,6 @@
 <template>
   <div class="todo-footer" v-show="total">
     <label>
-      <!-- <input type="checkbox" :checked="alldone" @change = "changeall" /> -->
-      <!-- 可以用v-model简写 -->
       <input type="checkbox" @click="alldone" />
     </label>
     <span>
@@ -15,8 +13,6 @@
 <script>
 
 export default {
-  // name: "tdfoot",
-  // props: ["todos", "checkall", "delall"],
   computed: {
     total() {
       return this.$store.state.todos.length;
@@ -24,33 +20,16 @@ export default {
     donetotal() {
       return this.$store.state.todos.reduce((pre, current) => pre + (current.done ? 1 : 0), 0);
     },
-
-
   },
   methods: {
-    // changeall(e){
-    //   this.checkall(e.target.checked)   //获取元素的是否被选择。配合非v-model
-    // }
-    // clearAll() {
-    //   if (confirm("Are you sure you want to delete")) {
-    //     // this.delall() //del all done
-    //   }
-
-    // },
     alldone(done) {
-      this.$store.dispatch('checkall', done);// 虽然功能实现，但是还得想更清楚。
+      this.$store.dispatch('checkall', done);
     },
     clearall(done) {
       this.$store.dispatch('delall', done);
     },
-
   },
-  //   mounted(){
-  //   console.log("app1",this.index)
-  //  },
 };
-
-// 数组的方法，得多熟悉。
 </script>
 
 <style>

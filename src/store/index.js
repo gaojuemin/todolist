@@ -31,33 +31,28 @@ const store = createStore({
     async readlist(store) {
       try {
         store.state.netlist = await axios.get('/api/todos');
-        // console.log('app1',response);
-        // store.commit('updatenetlist',response.data) //更新本地列表
       } catch (error) {
         console.error(error);
       }
+      store.commit('delall')
     },
-    async addlist(store) {
-      axios.post('/api/todos', {
-        title: 'hi',
-        description: 'test',
+    async delTableTodo(store,todoID){
+     await axios.delete('/api/todos/'+todoID,{
+       headers:{'Csrf-Token': 'nocheck'},
       })
-          .then(function(response) {
-            console.log(response);
-          })
-          .catch(function(error) {
-            console.log(error);
-          });
-      //   store.dispatch("readlist")
+    },
+    async addlist(store,inputValue) {
+     await axios.post('/api/todos', {
+        title: inputValue.id,
+        description: inputValue.description,
+      },
+      {
+        headers: {'Csrf-Token': 'nocheck'},
+      })
     },
   },
 
   mutations: {
-    // updatenetlist(state, ls) {
-    //     state.netlist = [...ls];
-    //     console.log('app2',state.netlist);
-    //   }
-    // ,
     addtodo(state, inputValue) {
       state.todo = inputValue;
       state.todos.unshift(state.todo);
@@ -65,15 +60,15 @@ const store = createStore({
     checktodo(state, inputValue) {
       state.todos[inputValue].done = !state.todos[inputValue].done;
     },
-    deltodo(state, inputValue) {
-      // state.todos = state.todos.filter((todos) => {
-      //     return !todos[inputValue];
-      // })   //not work
-      // console.log(state.todos.filter((todos) => {
-      //   return  todos != todos[inputValue]}))
-      //       const a = state.todos[inputValue];
-      //    state.todos = state.todos.filter(todo=>todo != a)  //ok
-      state.todos.splice(inputValue, 1); // 可用
+    deltodo: function(state, inputValue) {
+      state.todos.splice(inputValue, 1);// 可用
+      state.netlist.data.forEach(function (item) {
+        if (item.title === state.todos[inputValue].id) {
+          console.log(item.id)
+          axios.put('/api/todos/'+ item.id,{title:"123"},
+            {headers:{'Csrf-Token': 'nocheck'}})
+        }
+      });
     },
     checkall(state, done) {
       state.todos.forEach((todos) => {
@@ -85,23 +80,13 @@ const store = createStore({
         return !todos.done;
       });
     },
-    // getnetlist(context) {
-    //     state.netlist = axios.get('/api/todos')
-    //         .then(function (response) {
-    //             // 处理成功情况
-    //             console.log(response);
-    //         })
-    //         .catch(function (error) {
-    //             // 处理错误情况
-    //             console.log(error);
-    //         })
-    //         .then(function () {
-    //             // 总是会执行
-    //         });
-    // }
   },
-
   plugins: [createPersistedState()], // vuex数据持久化，本地存储
 });
 
 export default store;
+
+// PUT https://hxx-todo-server.herokuapp.com/api/todos/${id} 是修改
+//GET https://hxx-todo-server.herokuapp.com/api/todos
+//POST add new
+//DELETE  https://hxx-todo-server.herokuapp.com/api/todos/${id} 是删除
